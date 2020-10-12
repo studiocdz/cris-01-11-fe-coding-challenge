@@ -1,44 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Frontend Coding Challenge
 
-## Available Scripts
+Your task is to finish the Redux `mapStateToProps` function to a program to help an accountant to get balances from accounting journals.
 
-In the project directory, you can run:
+## Getting started
 
-### `yarn start`
+Install modules by running `npm install` in the command line, then `npm run start`.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Inputs & Outputs
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Journal and Accounts input fields are already parsed and stored in the app's
+Redux store.
 
-### `yarn test`
+User input has the following form:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    AAAA BBBB CCC-YY DDD-YY EEE
 
-### `yarn build`
+- AAAA is the starting account (* means first account of source file)
+- BBBB is the ending account(* means last account of source file)
+- CCC-YY is the first period (* means first period of source file)
+- DDD-YY is the last period (* means last period of source file)
+- EEE is output format (values can be HTML or CSV).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Examples of user inputs:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    1000 5000 MAR-16 JUL-16 HTML
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This user request must output all accounts from accounts starting with "1000" to accounts starting with "5000", from period MAR-16 to JUL-16. Output should be formatted as an HTML table.
 
-### `yarn eject`
+![1000 5000 MAR-16 JUL-16 HTML](/example-1.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    2000 * * MAY-16 CSV
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This user request must output all accounts from accounts starting with "2000" to last account from source file, from first period of file to MAY-16. Output should be formatted as CSV.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![2000 * * MAY-16 CSV](/example-2.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Challenge
 
-## Learn More
+Parsing input fields and storing in Redux has already been implemented; it's up to you to filter the journals and accounts to create the balance data set. This code should go into the selector function at the bottom of the BalanceOutput component. The BalanceOutput component expects balance to be an array of objects with the keys: ACCOUNT, DESCRIPTION, DEBIT, CREDIT, and BALANCE.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Post challenge
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After you're done, create a Github repo by the name of `${todays_date}-fe-coding-challenge`, commit your changes, push to your GitHub and send us a link.
