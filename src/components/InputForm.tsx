@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {setAccountsActionCreator, setJournalEntriesActionCreator, setUserInputActionCreator} from 'actions';
 import {accountsData, journalData} from 'data';
+import {AccountType, JournalType} from 'types';
 import {parseCSV, parseUserInput} from 'utils';
 
 const InputForm: FC<{dispatch: any}> = ({dispatch}) => {
@@ -14,8 +15,8 @@ const InputForm: FC<{dispatch: any}> = ({dispatch}) => {
     (e?: FormEvent<HTMLFormElement>) => {
       e?.preventDefault();
 
-      dispatch(setAccountsActionCreator(parseCSV(accounts)));
-      dispatch(setJournalEntriesActionCreator(parseCSV(journal)));
+      dispatch(setAccountsActionCreator(parseCSV(accounts) as AccountType[]));
+      dispatch(setJournalEntriesActionCreator(parseCSV(journal) as JournalType[]));
       dispatch(setUserInputActionCreator(parseUserInput(userInput)));
     },
     [dispatch, accounts, journal, userInput],

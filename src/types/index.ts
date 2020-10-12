@@ -1,6 +1,14 @@
-export type AccountType = {[key: string]: any};
+export type AccountType = {
+  ACCOUNT: number;
+  LABEL: string;
+};
 
-export type JournalType = {[key: string]: any};
+export type JournalType = {
+  ACCOUNT: number;
+  PERIOD: Date;
+  DEBIT: number;
+  CREDIT: number;
+};
 
 export type UserInputType = {
   startAccount: number | null;
