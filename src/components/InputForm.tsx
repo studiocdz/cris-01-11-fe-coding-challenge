@@ -1,4 +1,6 @@
-import React, {ChangeEvent, FC, FormEvent, useCallback, useEffect, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, {ChangeEvent, FC, FormEvent, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 
 import {setAccountsActionCreator, setJournalEntriesActionCreator, setUserInputActionCreator} from 'actions';
@@ -11,20 +13,17 @@ const InputForm: FC<{dispatch: any}> = ({dispatch}) => {
   const [journal, setJournal] = useState<string>(journalData);
   const [userInput, setUserInput] = useState<string>('1000 5000 MAR-16 JUL-16 HTML');
 
-  const handleSubmit = useCallback(
-    (e?: FormEvent<HTMLFormElement>) => {
-      e?.preventDefault();
+  const handleSubmit = (e?: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
 
-      dispatch(setAccountsActionCreator(parseCSV(accounts) as AccountType[]));
-      dispatch(setJournalEntriesActionCreator(parseCSV(journal) as JournalType[]));
-      dispatch(setUserInputActionCreator(parseUserInput(userInput)));
-    },
-    [dispatch, accounts, journal, userInput],
-  );
+    dispatch(setAccountsActionCreator(parseCSV(accounts) as AccountType[]));
+    dispatch(setJournalEntriesActionCreator(parseCSV(journal) as JournalType[]));
+    dispatch(setUserInputActionCreator(parseUserInput(userInput)));
+  };
 
   useEffect(() => {
     handleSubmit();
-  }, [handleSubmit]);
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     switch (e.target.id) {
