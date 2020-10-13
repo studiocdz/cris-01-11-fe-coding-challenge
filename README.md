@@ -39,6 +39,12 @@ This user request must output all accounts from accounts starting with "2000" to
 
 Parsing input fields and storing in Redux has already been implemented; it's up to you to filter the journals and accounts to create the balance data set. This code should go into the selector function at the bottom of the BalanceOutput component. The BalanceOutput component expects balance to be an array of objects with the keys: ACCOUNT, DESCRIPTION, DEBIT, CREDIT, and BALANCE.
 
+To test to make sure your code is working as intended, make sure you try the two examples listed above, and verify that the correct data gets rendered onto the screen:
+
+![solution 1](/solution-1.png)
+
+![solution 2](/solution-2.png)
+
 ## Post challenge
 
 After you're done, create a Github repo by the name of `${todays_date}-fe-coding-challenge`, commit your changes, push to your GitHub and send us a link.
