@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export type AccountType = {
   ACCOUNT: number;
   LABEL: string;
@@ -20,6 +22,6 @@ export type UserInputType = {
 
 export interface RootState {
   accounts: AccountType[];
-  journal: JournalType[];
+  journalEntries: JournalType[];
   userInput: UserInputType;
 }
