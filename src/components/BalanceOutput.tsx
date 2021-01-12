@@ -5,7 +5,7 @@ import {RootState, UserInputType} from 'types';
 import {dateToString, toCSV} from 'utils';
 
 interface Balance {
-  ACCOUNT: string;
+  ACCOUNT: number;
   DESCRIPTION: string;
   DEBIT: number;
   CREDIT: number;
@@ -64,6 +64,38 @@ export default connect(
     let balance: Balance[] = [];
 
     /* YOUR CODE GOES HERE */
+
+    const { accounts, journalEntries, userInput } = state;
+    const { startAccount, endAccount, startPeriod, endPeriod } = userInput;
+
+    journalEntries
+      .filter(({ ACCOUNT, PERIOD }) => {
+        return (!startAccount || startAccount <= ACCOUNT) && 
+          (!endAccount || endAccount >= ACCOUNT) && 
+          (!startPeriod?.getTime() || startPeriod <= PERIOD) && 
+          (!endPeriod?.getTime() || endPeriod >= PERIOD);
+      })
+      .forEach(entry => {
+        const accIndex = balance.findIndex(acc => acc.ACCOUNT === entry.ACCOUNT);
+        if (accIndex === -1) {
+          const label = accounts.find(acc => acc.ACCOUNT === entry.ACCOUNT)?.LABEL;
+          if (label) {
+            balance.push({
+              ACCOUNT: entry.ACCOUNT,
+              DESCRIPTION: label,
+              DEBIT: entry.DEBIT,
+              CREDIT: entry.CREDIT,
+              BALANCE: entry.DEBIT - entry.CREDIT
+            });
+          }
+        } else {
+          balance[accIndex].CREDIT += entry.CREDIT;
+          balance[accIndex].DEBIT += entry.DEBIT;
+          balance[accIndex].BALANCE += entry.DEBIT - entry.CREDIT;
+        }
+      });
+    
+    balance.sort((a, b) => a.ACCOUNT - b.ACCOUNT);
 
     const totalCredit = balance.reduce((acc, entry) => acc + entry.CREDIT, 0);
     const totalDebit = balance.reduce((acc, entry) => acc + entry.DEBIT, 0);
